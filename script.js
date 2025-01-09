@@ -83,6 +83,7 @@ class PomodoroTimer {
         this.modeToggleButton.textContent = this.isWorkMode ? 'Switch to Rest' : 'Switch to Work';
         this.startPauseButton.textContent = 'Start';
         this.startPauseButton.classList.remove('pause');
+        document.title = 'Focus Timer';
         this.updateDisplay();
     }
 
@@ -119,8 +120,18 @@ class PomodoroTimer {
     updateDisplay() {
         const minutes = Math.floor(this.timeLeft / 60);
         const seconds = this.timeLeft % 60;
-        this.minutesDisplay.textContent = minutes.toString().padStart(2, '0');
-        this.secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+        const timeString = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        
+        // Update the display elements
+        this.minutesDisplay.textContent = String(minutes).padStart(2, '0');
+        this.secondsDisplay.textContent = String(seconds).padStart(2, '0');
+        
+        // Update the page title with current mode
+        const mode = this.isWorkMode ? 'Work' : 'Rest';
+        document.title = `${timeString} - ${mode} - Focus Timer`;
+        
+        // Update progress ring
+        this.updateProgressRing();
     }
 
     updateTotalTime() {
