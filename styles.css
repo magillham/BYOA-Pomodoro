@@ -74,7 +74,7 @@ h1 {
     stroke: var(--primary-color);
     stroke-width: 12;
     stroke-linecap: round;
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
     transform-origin: 50% 50%;
     transition: stroke-dashoffset 0.3s;
     stroke-dasharray: 942.5;
@@ -136,6 +136,10 @@ button {
     background-color: #F1F3F9;
     color: var(--text-color);
     padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
 #modeToggle:hover {
@@ -278,4 +282,21 @@ button {
         top: 1rem;
         right: 1rem;
     }
+} 
+
+#addFive {
+    background-color: #F1F3F9;
+    color: var(--text-color);
+    min-width: 50px;
+    padding: 0.8rem 1rem;
+}
+
+#addFive:hover:not(:disabled) {
+    background-color: #E6E8F0;
+    transform: translateY(-2px);
+}
+
+#addFive:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 } 

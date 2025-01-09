@@ -16,6 +16,9 @@ class PomodoroTimer {
         console.log('Toggle button:', this.toggleStatsButton);
         console.log('Stats container:', this.statsContainer);
         
+        this.initialTime = this.workTime;
+        this.elapsedTime = 0;
+        
         this.initializeElements();
         this.initializeEventListeners();
         this.updateDisplay();
@@ -29,6 +32,7 @@ class PomodoroTimer {
         this.resetButton = document.getElementById('reset');
         this.modeToggleButton = document.getElementById('modeToggle');
         this.resetStatsButton = document.getElementById('resetStats');
+        this.addFiveButton = document.getElementById('addFive');
     }
 
     initializeEventListeners() {
@@ -41,6 +45,7 @@ class PomodoroTimer {
                 this.resetStats();
             }
         });
+        this.addFiveButton.addEventListener('click', () => this.addFiveMinutes());
     }
 
     loadStats() {
@@ -69,10 +74,12 @@ class PomodoroTimer {
             this.pause();
             this.startPauseButton.textContent = 'Start';
             this.startPauseButton.classList.remove('pause');
+            this.addFiveButton.disabled = true;
         } else {
             this.start();
             this.startPauseButton.textContent = 'Pause';
             this.startPauseButton.classList.add('pause');
+            this.addFiveButton.disabled = false;
         }
     }
 
@@ -80,7 +87,8 @@ class PomodoroTimer {
         this.pause();
         this.isWorkMode = !this.isWorkMode;
         this.timeLeft = this.isWorkMode ? this.workTime : this.restTime;
-        this.modeToggleButton.textContent = this.isWorkMode ? 'Switch to Rest' : 'Switch to Work';
+        this.elapsedTime = 0;
+        this.modeToggleButton.innerHTML = this.isWorkMode ? 'Break Time ♟️' : 'Get after it!';
         this.startPauseButton.textContent = 'Start';
         this.startPauseButton.classList.remove('pause');
         document.title = 'Focus Timer';
@@ -92,6 +100,7 @@ class PomodoroTimer {
             this.isRunning = true;
             this.timerId = setInterval(() => {
                 this.timeLeft--;
+                this.elapsedTime++;
                 this.updateDisplay();
                 this.updateTotalTime();
                 
@@ -112,9 +121,11 @@ class PomodoroTimer {
     reset() {
         this.pause();
         this.timeLeft = this.isWorkMode ? this.workTime : this.restTime;
-        this.updateDisplay();
+        this.elapsedTime = 0;
         this.startPauseButton.textContent = 'Start';
         this.startPauseButton.classList.remove('pause');
+        document.title = 'Focus Timer';
+        this.updateDisplay();
     }
 
     updateDisplay() {
@@ -167,12 +178,17 @@ class PomodoroTimer {
 
     updateProgressRing() {
         const circle = document.querySelector('.progress-ring-circle');
-        const circumference = 2 * Math.PI * 150; // 150 is the radius of the circle
-        const totalTime = this.isWorkMode ? this.workTime : this.restTime;
+        const circumference = 2 * Math.PI * 150;
+        const totalTime = this.timeLeft + this.elapsedTime;
         const progress = this.timeLeft / totalTime;
-        const offset = circumference - (progress * circumference);
+        const offset = -(circumference - (progress * circumference));
         circle.style.strokeDasharray = `${circumference} ${circumference}`;
         circle.style.strokeDashoffset = offset;
+    }
+
+    addFiveMinutes() {
+        this.timeLeft += 5 * 60;
+        this.updateDisplay();
     }
 }
 
