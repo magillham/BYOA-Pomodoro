@@ -132,6 +132,12 @@ button {
     fill: var(--text-color);
 }
 
+.mode-toggle {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 #modeToggle {
     background-color: #F1F3F9;
     color: var(--text-color);
