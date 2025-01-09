@@ -25,6 +25,7 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     max-width: 90%;
     width: 480px;
+    position: relative;
 }
 
 h1 {
@@ -151,4 +152,85 @@ button {
     .timer {
         font-size: 3.5rem;
     }
+} 
+
+.reset-stats {
+    margin-top: 1rem;
+    background-color: #FFE5E5;
+    color: #D64545;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.reset-stats:hover {
+    background-color: #FFD1D1;
+    transform: translateY(-2px);
+} 
+
+.stats-tab-container {
+    position: absolute;
+    left: calc(100% - 5px);
+    top: 20px;
+    z-index: 100;
+}
+
+.stats-tab {
+    position: relative;
+    background-color: var(--background-color);
+    border-radius: 0 8px 8px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border-left: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stats-icon {
+    font-size: 1.2rem;
+}
+
+.stats-text {
+    position: absolute;
+    left: 40px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.stats-tab:hover {
+    padding-right: 100px;
+    background-color: #E6E8F0;
+}
+
+.stats-tab:hover .stats-text {
+    opacity: 1;
+}
+
+.stats {
+    position: absolute;
+    top: 60px;
+    left: calc(100% + 20px);
+    width: 230px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    z-index: 90;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.stats.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
 } 

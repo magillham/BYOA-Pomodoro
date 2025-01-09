@@ -9,6 +9,12 @@
 </head>
 <body>
     <div class="container">
+        <div class="stats-tab-container">
+            <button id="toggleStats" class="stats-tab" title="Statistics">
+                <span class="stats-icon">📊</span>
+                <span class="stats-text">Show Stats</span>
+            </button>
+        </div>
         <h1>Focus Timer</h1>
         <div class="timer-container">
             <div class="timer">
@@ -31,6 +37,19 @@
         </div>
         <div class="mode-toggle">
             <button id="modeToggle">Switch to Rest</button>
+        </div>
+        <div class="stats-container">
+            <div class="stats" hidden>
+                <div class="stat-item">
+                    <span>Total Work Time:</span>
+                    <span id="totalWorkTime">00:00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span>Total Rest Time:</span>
+                    <span id="totalRestTime">00:00:00</span>
+                </div>
+                <button id="resetStats" class="reset-stats">Reset Stats</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
